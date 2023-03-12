@@ -17,6 +17,11 @@ public class Company {
     this.apiKey = UUID.randomUUID().toString();
   }
 
+  public String generateApiKey() {
+    setApiKey(UUID.randomUUID().toString());
+    return apiKey;
+  }
+
   public String getId() {
     return id;
   }

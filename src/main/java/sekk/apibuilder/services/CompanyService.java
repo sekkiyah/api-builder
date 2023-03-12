@@ -1,6 +1,7 @@
 package sekk.apibuilder.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,38 @@ public class CompanyService {
     return companyRepository.findAll();
   }
 
-  public Company getCompanyById(String id) {
-    return companyRepository.findCompanyById(id);
+  public Optional<Company> getCompanyById(String id) {
+    return companyRepository.findById(id);
   }
 
-  public Company getCompanyByAffid(String affid) {
+  public Optional<Company> getCompanyByAffid(String affid) {
     return companyRepository.findCompanyByAffid(affid);
   }
 
-  public Company createCompany(Company newCompany) {
-    return companyRepository.save(newCompany);
+  public Company createCompany(Company company) {
+    // Workaround for avoiding regenerating apiKey from Company constructor
+    // Company newCompany = companyRepository.save(company);
+    // newCompany.generateApiKey();
+    // return companyRepository.save(newCompany);
+    
+    return companyRepository.save(company);
+  }
+
+  public Optional<Company> updateCompany(Company company) {
+    if(companyRepository.existsById(company.getId())){
+      return Optional.of(companyRepository.save(company));
+    } else {
+      return Optional.empty();
+    }
+  }
+
+  public Optional<Company> deleteCompany(Company company) {
+    Optional<Company> deletedCompany = companyRepository.findById(company.getId());
+    if(!deletedCompany.isEmpty()){
+      companyRepository.delete(company);
+      return deletedCompany;
+    } else {
+      return Optional.empty();
+    }
   }
 }
