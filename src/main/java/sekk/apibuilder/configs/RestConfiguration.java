@@ -14,5 +14,6 @@ public class RestConfiguration implements RepositoryRestConfigurer {
   public void configureRepositoryRestConfiguration(
     RepositoryRestConfiguration config, CorsRegistry cors) {
       config.exposeIdsFor(Company.class);
+      cors.addMapping("/**").allowedOrigins("*");
     }
 }

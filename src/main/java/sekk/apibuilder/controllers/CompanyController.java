@@ -1,6 +1,5 @@
 package sekk.apibuilder.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,8 @@ public class CompanyController {
   private CompanyService companyService;
 
   @GetMapping
-  public List<Company> getAllCompanies() {
-    return companyService.getAllCompanies();
+  public ResponseEntity<?> getAllCompanies() {
+    return ResponseEntity.ok(companyService.getAllCompanies());
   }
 
   @GetMapping("/id/{id}")
