@@ -1,5 +1,6 @@
 package sekk.apibuilder.models;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,7 @@ public class Company {
   String affid;
   String companyName;
   String apiKey;
+  ArrayList<ApiBody> apiBody = new ArrayList<>();
 
   public Company() {
     this.apiKey = UUID.randomUUID().toString();
@@ -54,4 +56,12 @@ public class Company {
     this.apiKey = apiKey;
   }
 
+  public ArrayList<ApiBody> getApiBody() {
+    return apiBody;
+  }
+
+  public void setApiBody(ArrayList<ApiBody> apiBody) {
+    this.apiBody = apiBody;
+  }
+  
 }
