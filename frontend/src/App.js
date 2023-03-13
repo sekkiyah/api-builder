@@ -8,8 +8,7 @@ const App = () => {
   const [companies, setCompanies] = useState([]);
 
   const fetchCompanies = async () => {
-    const result = await getAllCompanies();
-    console.log(result);
+    setCompanies(await getAllCompanies());
   };
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const App = () => {
     <>
       <Container>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home companies={companies} />} />
         </Routes>
       </Container>
     </>

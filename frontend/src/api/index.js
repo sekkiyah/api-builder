@@ -16,7 +16,9 @@ export const getAllCompanies = async () => {
     const headers = createHeaders();
     return await fetch(`${BASE_URL}/companies`, {
       headers,
-    }).then(response => response.json());
+    })
+      .then(response => response.json())
+      .then(data => data._embedded.companies);
   } catch (error) {
     console.error(error);
   }
