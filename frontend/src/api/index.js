@@ -24,6 +24,15 @@ export const getAllCompanies = async () => {
   }
 };
 
+export const getCompanyById = async id => {
+  try {
+    const headers = createHeaders();
+    return await fetch(`${BASE_URL}/companies/${id}`, {
+      headers,
+    }).then(response => response.json());
+  } catch (error) {}
+};
+
 export const createCompany = async company => {
   try {
     const headers = createHeaders();

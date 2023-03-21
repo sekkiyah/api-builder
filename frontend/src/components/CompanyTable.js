@@ -15,7 +15,7 @@ const CompanyTable = ({ companies, navigate }) => {
         {companies &&
           companies.map(company => {
             return (
-              <tr key={company.id} id='companyRow' onClick={() => console.log(company.id)}>
+              <tr key={company.id} id='companyRow' onClick={() => navigate(`/company/${company.id}`)}>
                 <td>{company.id}</td>
                 <td>{company.affid}</td>
                 <td>{company.companyName}</td>
