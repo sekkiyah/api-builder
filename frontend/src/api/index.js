@@ -23,3 +23,16 @@ export const getAllCompanies = async () => {
     console.error(error);
   }
 };
+
+export const createCompany = async company => {
+  try {
+    const headers = createHeaders();
+    return await fetch(`${BASE_URL}/companies`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(company),
+    }).then(response => response.json());
+  } catch (error) {
+    console.error(error);
+  }
+};

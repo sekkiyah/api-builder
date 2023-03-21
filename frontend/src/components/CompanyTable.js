@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 
-const CompanyTable = ({ companies }) => {
+const CompanyTable = ({ companies, navigate }) => {
   return (
     <Table striped bordered hover className='text-center'>
       <thead>
@@ -15,7 +15,7 @@ const CompanyTable = ({ companies }) => {
         {companies &&
           companies.map(company => {
             return (
-              <tr key={company.id}>
+              <tr key={company.id} id='companyRow' onClick={() => console.log(company.id)}>
                 <td>{company.id}</td>
                 <td>{company.affid}</td>
                 <td>{company.companyName}</td>
