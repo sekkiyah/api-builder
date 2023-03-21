@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { Home } from './pages';
+import { CompanyView, Home } from './pages';
 import { getAllCompanies } from './api';
 
 const App = () => {
+  const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
 
   const fetchCompanies = async () => {
     setCompanies(await getAllCompanies());
+  };
+
+  const refresh = async () => {
+    await fetchCompanies();
   };
 
   useEffect(() => {
@@ -19,7 +24,8 @@ const App = () => {
     <>
       <Container>
         <Routes>
-          <Route path='/' element={<Home companies={companies} />} />
+          <Route path='/' element={<Home companies={companies} navigate={navigate} refresh={refresh} />} />
+          <Route path='/company/:companyId' element={<CompanyView navigate={navigate} />} />
         </Routes>
       </Container>
     </>
