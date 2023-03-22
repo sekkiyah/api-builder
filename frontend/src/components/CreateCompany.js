@@ -6,11 +6,13 @@ const CreateCompany = ({ navigate, refresh }) => {
   const [showModal, setShowModal] = useState(false);
   const [affid, setAffid] = useState('');
   const [companyName, setCompanyName] = useState('');
+  const [apiName, setApiName] = useState('');
 
   const handleSubmit = async () => {
     const company = {
       affid,
       companyName,
+      apiName,
     };
     const result = await createCompany(company);
 
@@ -28,10 +30,10 @@ const CreateCompany = ({ navigate, refresh }) => {
 
   return (
     <>
-      <Button onClick={() => setShowModal(true)}>Create Company</Button>
+      <Button onClick={() => setShowModal(true)}>Create API</Button>
 
       <Modal show={showModal} onHide={() => setShowModal(false)} backdrop='static'>
-        <Modal.Header>Create Company</Modal.Header>
+        <Modal.Header>Create API</Modal.Header>
         <Form
           onSubmit={e => {
             e.preventDefault();
@@ -49,6 +51,12 @@ const CreateCompany = ({ navigate, refresh }) => {
                   <Form.Control required placeholder='companyName' onChange={e => setCompanyName(e.target.value)} />
                 </FloatingLabel>
               </Col>
+            </Row>
+
+            <Row>
+              <FloatingLabel as={Col} className='p-1' label='API Name'>
+                <Form.Control required placeholder='apiName' onChange={e => setApiName(e.target.value)} />
+              </FloatingLabel>
             </Row>
           </Modal.Body>
           <Modal.Footer>
