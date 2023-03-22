@@ -13,6 +13,7 @@ public class Company {
   String affid;
   String companyName;
   String apiKey;
+  String apiName;
   ArrayList<ApiBody> apiBody = new ArrayList<>();
 
   public Company() {
@@ -54,6 +55,14 @@ public class Company {
 
   public void setApiKey(String apiKey) {
     this.apiKey = apiKey;
+  }
+
+  public String getApiName() {
+    return apiName;
+  }
+
+  public void setApiName(String apiName) {
+    this.apiName = apiName;
   }
 
   public ArrayList<ApiBody> getApiBody() {

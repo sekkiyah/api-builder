@@ -1,15 +1,15 @@
 package sekk.apibuilder.models;
 
 public class ApiBody {
-  String label;
-  String value;
+  String key = "";
+  String value = "";
 
-  public String getLabel() {
-    return label;
+  public String getKey() {
+    return key;
   }
 
-  public void setLabel(String label) {
-    this.label = label;
+  public void setKey(String key) {
+    this.key = key;
   }
 
   public String getValue() {
