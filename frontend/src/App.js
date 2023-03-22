@@ -25,7 +25,7 @@ const App = () => {
       <Container>
         <Routes>
           <Route path='/' element={<Home companies={companies} navigate={navigate} refresh={refresh} />} />
-          <Route path='/company/:companyId' element={<CompanyView navigate={navigate} />} />
+          <Route path='/company/:companyId' element={<CompanyView navigate={navigate} refresh={refresh} />} />
         </Routes>
       </Container>
     </>

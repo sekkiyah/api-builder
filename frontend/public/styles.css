@@ -1,3 +1,8 @@
 #companyRow:hover {
   cursor: pointer;
 }
+
+.accordion-button:not(.collapsed) {
+  color: black !important;
+  background-color: white !important;
+}

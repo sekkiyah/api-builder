@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api';
+export const BASE_URL = 'http://localhost:8080';
 
 const createHeaders = jwt => {
   return jwt
@@ -14,7 +14,7 @@ const createHeaders = jwt => {
 export const getAllCompanies = async () => {
   try {
     const headers = createHeaders();
-    return await fetch(`${BASE_URL}/companies`, {
+    return await fetch(`${BASE_URL}/api/companies`, {
       headers,
     })
       .then(response => response.json())
@@ -27,7 +27,7 @@ export const getAllCompanies = async () => {
 export const getCompanyById = async id => {
   try {
     const headers = createHeaders();
-    return await fetch(`${BASE_URL}/companies/${id}`, {
+    return await fetch(`${BASE_URL}/api/companies/${id}`, {
       headers,
     }).then(response => response.json());
   } catch (error) {}
@@ -36,10 +36,36 @@ export const getCompanyById = async id => {
 export const createCompany = async company => {
   try {
     const headers = createHeaders();
-    return await fetch(`${BASE_URL}/companies`, {
+    return await fetch(`${BASE_URL}/api/companies`, {
       method: 'POST',
       headers,
       body: JSON.stringify(company),
+    }).then(response => response.json());
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateCompany = async company => {
+  try {
+    const headers = createHeaders();
+    return await fetch(`${BASE_URL}/api/companies/${company.id}`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(company),
+    }).then(response => response.json());
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteCompany = async id => {
+  try {
+    const headers = createHeaders();
+    return await fetch(`${BASE_URL}/companies`, {
+      method: 'DELETE',
+      headers,
+      body: JSON.stringify({ id }),
     }).then(response => response.json());
   } catch (error) {
     console.error(error);
