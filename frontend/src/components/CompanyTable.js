@@ -6,7 +6,8 @@ const CompanyTable = ({ companies, navigate }) => {
     <Table striped bordered hover className='text-center'>
       <thead>
         <tr>
-          <th>ID</th>
+          {/* <th>ID</th> */}
+          <th>API Name</th>
           <th>Affid</th>
           <th>Company Name</th>
         </tr>
@@ -16,7 +17,8 @@ const CompanyTable = ({ companies, navigate }) => {
           companies.map(company => {
             return (
               <tr key={company.id} id='companyRow' onClick={() => navigate(`/company/${company.id}`)}>
-                <td>{company.id}</td>
+                {/* <td>{company.id}</td> */}
+                <td>{company.apiName}</td>
                 <td>{company.affid}</td>
                 <td>{company.companyName}</td>
               </tr>
