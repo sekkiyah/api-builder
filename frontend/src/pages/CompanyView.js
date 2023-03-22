@@ -34,19 +34,27 @@ const CompanyView = ({ navigate, refresh }) => {
     }
   };
 
-  const updateField = async (index, e) => {
-    let updatedFields = [...apiBody];
+  const addField = () => {
+    setApiBody([...apiBody, { key: '', value: '' }]);
+  };
+
+  const updateField = (index, e) => {
+    const updatedFields = [...apiBody];
     updatedFields[index][e.target.id] = e.target.value;
     setApiBody(updatedFields);
   };
 
+  const deleteField = index => {
+    const updatedFields = apiBody.filter((v, i) => i != index);
+    setApiBody(updatedFields);
+  };
+
   const handleDelete = async () => {
-    const response = confirm('Are you sure you would like to delete this company?');
+    const response = confirm('Are you sure you would like to delete this API?');
 
     if (response) {
       const result = await deleteCompany(companyId);
       if (result) {
-        console.log(result);
         await refresh();
         navigate('/');
       }
@@ -101,7 +109,7 @@ const CompanyView = ({ navigate, refresh }) => {
                   placeholder='apiEndpoint'
                   plaintext
                   disabled
-                  defaultValue={BASE_URL + '/companies/' + companyId}
+                  defaultValue={BASE_URL + '/custom/api/' + companyId}
                 />
               </FloatingLabel>
             </Col>
@@ -120,6 +128,7 @@ const CompanyView = ({ navigate, refresh }) => {
             </Col>
           </Form.Group>
 
+          {/* Begin API Body */}
           <Form.Group as={Row}>
             <Accordion flush className='mt-3 border-bottom px-0' defaultActiveKey='0'>
               <Accordion.Item eventKey='0'>
@@ -132,6 +141,7 @@ const CompanyView = ({ navigate, refresh }) => {
                           <Form.Control
                             id='key'
                             placeholder='Key'
+                            required
                             value={field.key}
                             onChange={e => updateField(index, e)}
                           />
@@ -144,7 +154,9 @@ const CompanyView = ({ navigate, refresh }) => {
                             onChange={e => updateField(index, e)}
                           />
 
-                          <Button variant='danger'>x</Button>
+                          <Button variant='danger' onClick={() => deleteField(index)}>
+                            x
+                          </Button>
                         </Form.Group>
                       );
                     })
@@ -154,12 +166,15 @@ const CompanyView = ({ navigate, refresh }) => {
                     </Form.Group>
                   )}
                   <Form.Group className='d-flex justify-content-end py-2'>
-                    <Button variant='success'>+</Button>
+                    <Button variant='success' onClick={() => addField()}>
+                      +
+                    </Button>
                   </Form.Group>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
           </Form.Group>
+          {/* End API Body */}
 
           <Form.Group className='mt-3 px-0 d-flex justify-content-end'>
             <Button type='submit' variant='success' className='mx-2'>
@@ -172,7 +187,7 @@ const CompanyView = ({ navigate, refresh }) => {
 
           <Form.Group className='mt-3 d-flex justify-content-end'>
             <Button variant='danger' onClick={() => handleDelete()}>
-              Delete
+              Delete API
             </Button>
           </Form.Group>
         </Form>
