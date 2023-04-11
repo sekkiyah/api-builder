@@ -73,3 +73,14 @@ export const deleteCompany = async id => {
     console.error(error);
   }
 };
+
+export const getApiBody = async id => {
+  try {
+    const headers = createHeaders();
+    return await fetch(`${BASE_URL}/custom/api/${id}`, {
+      headers,
+    }).then(response => response.json());
+  } catch (error) {
+    console.error(error);
+  }
+};

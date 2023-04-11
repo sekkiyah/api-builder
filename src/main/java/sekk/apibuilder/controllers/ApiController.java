@@ -1,6 +1,8 @@
 package sekk.apibuilder.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class ApiController {
   public ResponseEntity<?> getCompanyApi(@PathVariable String id) {
     Optional<Company> company = companyService.getCompanyById(id);
     ArrayList<ApiBody> apiBody = company.get().getApiBody();
-    return ResponseEntity.ok(apiBody);
+    Map<String, String> data = new HashMap<>();
+
+    apiBody.forEach((item) -> {
+      data.put(item.getKey(), item.getValue());
+    });
+
+    return ResponseEntity.ok(data);
   }
 }
