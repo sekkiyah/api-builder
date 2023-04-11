@@ -30,7 +30,9 @@ export const getCompanyById = async id => {
     return await fetch(`${BASE_URL}/api/companies/${id}`, {
       headers,
     }).then(response => response.json());
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const createCompany = async company => {
